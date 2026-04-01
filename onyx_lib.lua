@@ -28,12 +28,15 @@ local function Tween(obj, time, goal)
 end
 
 function Onyx:CreateWindow(config)
+    config = config or {}
     local self = setmetatable({}, Onyx)
     self.Name = config.Name or "Onyx Hub"
     self.Accent = config.Accent or Color3.fromRGB(244, 181, 209)
     self.Key = config.Key or "onyx-dev"
     self.Tabs = {}
     self.ActiveTab = nil
+    
+    local InitMain -- Forward declaration
     
     -- Main UI Container
     local ScreenGui = Instance.new("ScreenGui")
@@ -126,7 +129,8 @@ function Onyx:CreateWindow(config)
                 end
                 task.wait(0.6)
                 KeyFrame:Destroy()
-                self:InitMain()
+                -- Trigger Main UI Entry Animation
+                Tween(self.Main, 0.8, {Size = UDim2.new(0, 600, 0, 400), Position = UDim2.new(0.5, -300, 0.5, -200)})
             else
                 self:Notify("Access Denied", "Invalid key provided.")
                 -- Error Animation
@@ -145,6 +149,7 @@ function Onyx:CreateWindow(config)
         end)
     end
 
+    self:InitMain()
     CreateKeySystem()
     return self
 end
@@ -170,9 +175,6 @@ function Onyx:InitMain()
     UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     UIStroke.Parent = MainFrame
 
-    -- Entry Animation
-    Tween(MainFrame, 0.8, {Size = UDim2.new(0, 600, 0, 400), Position = UDim2.new(0.5, -300, 0.5, -200)})
-    
     -- Sidebar
     local Sidebar = Instance.new("Frame")
     Sidebar.Size = UDim2.new(0, 180, 1, 0)

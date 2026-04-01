@@ -35,7 +35,7 @@ const LUAU_CODE = `--[[
     A high-fidelity, animated UI library for Roblox.
 ]]
 
-local Onyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/Onyx/Lib/main/Source.lua"))()
+local Onyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/ajhsjau39/onyx/refs/heads/main/onyx_lib.lua"))()
 
 local Window = Onyx:CreateWindow({
     Name = "Onyx Hub",
